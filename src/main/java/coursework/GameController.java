@@ -11,7 +11,8 @@ public class GameController {
     private ArrayList<Alien> aliens;
     private ArrayList<Bullet> bullets;
     private ArrayList<Bullet> alienBullets;
-    private int alienColumns = 10, alienRows = 5, score = 0;
+    private int alienColumns = 10, alienRows = 5;
+    private int score = 0;
     private boolean gameOver = false;
     private int alienVelocityX = 2;
     private Random random = new Random();
@@ -19,6 +20,8 @@ public class GameController {
 
     private Image shipImage;
     private Image alienImage;
+
+    private AlienFactory alienFactory;
 
     public GameController(int tileSize, int rows, int columns) {
         this.tileSize = tileSize;
@@ -32,6 +35,8 @@ public class GameController {
         aliens = new ArrayList<>();
         bullets = new ArrayList<>();
         alienBullets = new ArrayList<>();
+
+        alienFactory = new StandardAlienFactory();
         createAliens();
     }
 
@@ -49,6 +54,10 @@ public class GameController {
         }
     }
 
+    public Bullet createBullet(int x, int y, int velocityY) {
+        return new Bullet(x, y, Bullet.DEFAULT_WIDTH, Bullet.DEFAULT_HEIGHT, velocityY);
+    }
+
     private void moveAlienBullets() {
         alienBullets.removeIf(bullet -> bullet.isOutOfBounds(boardHeight) || bullet.isUsed());
         for (Bullet bullet : alienBullets) {
@@ -59,7 +68,7 @@ public class GameController {
     private void createAliens() {
         for (int c = 0; c < alienColumns; c++) {
             for (int r = 0; r < alienRows; r++) {
-                Alien alien = new Alien(tileSize + c * tileSize * 2, tileSize + r * tileSize, tileSize * 2, tileSize, alienImage);
+                Alien alien = alienFactory.createAlien(tileSize + c * tileSize * 2, tileSize + r * tileSize, tileSize * 2, tileSize, alienImage, this);
                 aliens.add(alien);
             }
         }

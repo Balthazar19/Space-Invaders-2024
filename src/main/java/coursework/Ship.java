@@ -11,14 +11,14 @@ public class Ship extends Block {
     }
 
     public void moveLeft() {
-        x = Math.max(x - width / 2, 0);
+        setX(Math.max(getX() - getWidth() / 2, 0));
     }
 
     public void moveRight(int boardWidth) {
-        x = Math.min(x + width / 2, boardWidth - width);
+        setX(Math.min(getX() + getWidth() / 2, boardWidth - getWidth()));
     }
 
     public void draw(Graphics g) {
-        g.drawImage(img, x, y, width, height, null);
+        g.drawImage(img, getX(), getY(), getWidth(), getHeight(), null);
     }
 }

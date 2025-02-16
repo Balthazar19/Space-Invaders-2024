@@ -3,21 +3,23 @@ package coursework;
 import java.awt.*;
 
 public class Bullet extends Block {
+    public static final int DEFAULT_WIDTH = 4;
+    public static final int DEFAULT_HEIGHT = 10;
     private int velocityY;
     private boolean used;
 
     public Bullet(int x, int y, int width, int height, int velocityY) {
-        super(x, y, width, height);
+        super(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT);
         this.velocityY = velocityY;
         this.used = false;
     }
 
     public void move() {
-        y += velocityY;
+        setY(getY() + velocityY);
     }
 
     public boolean isOutOfBounds(int height) {
-        return y < 0 || y > height;
+        return getY() < 0 || getY() > height;
     }
 
     public boolean isUsed() {
@@ -30,6 +32,6 @@ public class Bullet extends Block {
 
     public void draw(Graphics g) {
         g.setColor(Color.white);
-        g.fillRect(x, y, width, height);
+        g.fillRect(getX(), getY(), getWidth(), getHeight());
     }
 }

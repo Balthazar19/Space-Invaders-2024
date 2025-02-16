@@ -20,7 +20,7 @@ public class KeyInputHandler implements KeyListener {
             case KeyEvent.VK_A -> ship.moveLeft();
             case KeyEvent.VK_D -> ship.moveRight(controller.getBoardWidth());
             case KeyEvent.VK_SPACE -> {
-                Bullet bullet = new Bullet(ship.getX() + ship.getWidth() / 2 - 2, ship.getY(), 4, 10, -10);
+                Bullet bullet = controller.createBullet(ship.getX() + ship.getWidth() / 2 - 2, ship.getY(), -10);
                 controller.getBullets().add(bullet);
             }
         }

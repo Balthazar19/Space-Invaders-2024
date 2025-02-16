@@ -5,7 +5,9 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class GameBoard extends JPanel implements ActionListener {
-    private int boardWidth, boardHeight;
+    //public static int boardHeight;
+    public int boardWidth;
+    public static int boardHeight;
     private GameController gameController;
     private Timer gameLoop;
 
